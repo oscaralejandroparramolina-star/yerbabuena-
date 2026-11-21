@@ -8,273 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-/* ============================================================
-   YERBABUENA — identidad: verde bosque + crema + latón (oro apagado).
-   Diseño editorial, fotografía a sangre, animación lenta y discreta.
-   ============================================================ */
-:root{
-  --crema:#f7f3ea;
-  --crema-2:#efe8d9;
-  --bosque:#172a20;
-  --bosque-2:#20392b;
-  --oliva:#5f7049;
-  --laton:#b08d4c;
-  --laton-claro:#c9a86a;
-  --tinta:#141a16;
-  --suave:#6c7a6e;
-  --linea:#ddd4c2;
-  --display:"Cormorant Garamond",Georgia,serif;
-  --body:"Jost",system-ui,sans-serif;
-  color-scheme:light;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%}
-body{background:var(--crema);color:var(--tinta);font-family:var(--body);font-weight:300;font-size:16px;line-height:1.65;overflow-x:hidden}
-img{display:block;width:100%;height:100%;object-fit:cover}
-a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
-:focus-visible{outline:2px solid var(--laton);outline-offset:3px}
-.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
-section{padding:120px 0}
-h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.08;text-wrap:balance;letter-spacing:.01em}
-.label{font-size:12px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--laton)}
-.h2{font-size:clamp(38px,5.5vw,62px);color:var(--bosque)}
-.lead{color:var(--suave);max-width:54ch;margin-top:18px;font-size:17px}
-.center{text-align:center;margin:0 auto}
-.center .lead{margin-left:auto;margin-right:auto}
-
-/* Fotos: contenedor con degradado de respaldo; si la foto falla, queda el panel elegante */
-.ph{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--bosque-2),var(--bosque))}
-.ph.e{background:linear-gradient(135deg,#2a4535,#15271d)}
-.ph.p{background:linear-gradient(135deg,#3a2a20,#1d130d)}
-.ph.h{background:linear-gradient(135deg,#3a2e1c,#201708)}
-.ph.pa{background:linear-gradient(135deg,#33401f,#1b240f)}
-.ph.po{background:linear-gradient(135deg,#3a2430,#1d0f15)}
-.ph.b{background:linear-gradient(135deg,#1f3f39,#0f201c)}
-.ph img{position:absolute;inset:0;transition:transform 1.1s cubic-bezier(.2,.6,.2,1),opacity .6s}
-.ph img.noimg{opacity:0}
-.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,18,13,.28));opacity:0;transition:opacity .5s}
-.ph:hover img{transform:scale(1.06)}
-
-/* Botones */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:50px;padding:0 30px;border-radius:2px;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;transition:background .35s,color .35s,border-color .35s,transform .35s;border:1px solid transparent}
-.btn-solid{background:var(--laton);color:#1b1407}
-.btn-solid:hover{background:var(--laton-claro)}
-.btn-line{border-color:rgba(255,255,255,.55);color:#fff}
-.btn-line:hover{background:rgba(255,255,255,.1);border-color:#fff}
-.btn-dark{border:1px solid var(--bosque);color:var(--bosque)}
-.btn-dark:hover{background:var(--bosque);color:var(--crema)}
-
-/* ===================== NAV ===================== */
-.nav{position:fixed;inset:0 0 auto;z-index:50;transition:background .4s,box-shadow .4s,padding .4s;padding:8px 0}
-.nav.solid{background:rgba(247,243,234,.95);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--linea)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:600;font-size:27px;letter-spacing:.02em;color:#fff;transition:color .4s}
-.nav.solid .logo{color:var(--bosque)}
-.logo svg{width:26px;height:26px;flex:none}
-.links{display:flex;align-items:center;gap:36px;list-style:none}
-.links a{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.9);transition:color .3s;position:relative}
-.nav.solid .links a{color:var(--tinta)}
-.links a:not(.navbtn)::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:1px;background:var(--laton);transition:right .3s}
-.links a:not(.navbtn):hover::after{right:0}
-.navbtn{border:1px solid currentColor;padding:11px 20px;color:#fff}
-.nav.solid .navbtn{color:var(--bosque)}
-.navbtn:hover{background:var(--laton);border-color:var(--laton);color:#1b1407!important}
-.burger{display:none;width:46px;height:46px;color:#fff;z-index:60}
-.nav.solid .burger{color:var(--bosque)}
-.burger span{display:block;width:24px;height:1.5px;background:currentColor;margin:6px auto;transition:transform .3s,opacity .3s}
-.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
-.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
-.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
-
-/* ===================== HERO ===================== */
-.hero{position:relative;height:100svh;min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#20392b,#0c1711)}
-.hero-bg img{animation:ken 20s ease-out forwards}
-@keyframes ken{from{transform:scale(1.12)}to{transform:scale(1)}}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,18,13,.5),rgba(10,18,13,.35) 40%,rgba(10,18,13,.72))}
-.hero-in{position:relative;z-index:2;padding:0 24px;max-width:860px}
-.hero .label{color:var(--laton-claro)}
-.hero h1{font-size:clamp(68px,13vw,150px);font-weight:400;line-height:.95;margin:18px 0 10px;letter-spacing:.01em}
-.hero .frase{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(22px,3.2vw,34px);color:#f0e6cf}
-.hero p.txt{max-width:50ch;margin:22px auto 38px;color:rgba(255,255,255,.82);font-size:16px}
-.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.7);font-size:11px;letter-spacing:.3em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:10px}
-.scroll-cue i{display:block;width:1px;height:40px;background:linear-gradient(var(--laton-claro),transparent);animation:cue 2.2s ease-in-out infinite}
-@keyframes cue{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
-
-/* ===================== NOSOTROS ===================== */
-.nosotros-in{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
-.nos-fig{position:relative}
-.nos-fig .ph{aspect-ratio:4/5;border-radius:3px}
-.nos-fig .tag{position:absolute;right:-22px;bottom:34px;background:var(--bosque);color:var(--crema);padding:22px 26px;max-width:210px;border-radius:3px}
-.nos-fig .tag b{font-family:var(--display);font-size:30px;display:block;color:var(--laton-claro);line-height:1}
-.nos-fig .tag span{font-size:12px;letter-spacing:.14em;text-transform:uppercase}
-.pilares{display:grid;grid-template-columns:1fr 1fr;gap:30px 36px;margin-top:38px}
-.pilar h3{font-size:22px;color:var(--bosque);margin-bottom:6px;display:flex;align-items:center;gap:10px}
-.pilar h3::before{content:"";width:22px;height:1px;background:var(--laton)}
-.pilar p{font-size:15px;color:var(--suave)}
-
-/* ===================== MENU ===================== */
-.menu{background:var(--crema-2)}
-.cats{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin:44px auto 52px;max-width:860px}
-.cat{padding:12px 22px;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--suave);position:relative;transition:color .3s}
-.cat::after{content:"";position:absolute;left:50%;right:50%;bottom:4px;height:1px;background:var(--laton);transition:left .3s,right .3s}
-.cat:hover{color:var(--bosque)}
-.cat[aria-pressed="true"]{color:var(--bosque)}
-.cat[aria-pressed="true"]::after{left:18%;right:18%}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 30px}
-.card{cursor:pointer;display:flex;flex-direction:column}
-.card .ph{aspect-ratio:3/2.3;border-radius:3px}
-.card .tag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(247,243,234,.92);color:var(--bosque);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:2px}
-.card .tag.Especialidad{background:var(--laton);color:#1b1407}
-.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-top:18px;padding-bottom:12px;border-bottom:1px solid var(--linea)}
-.card h3{font-size:25px;color:var(--bosque);line-height:1.1}
-.card .precio{font-family:var(--display);font-size:22px;color:var(--laton);font-variant-numeric:tabular-nums;flex:none}
-.card p{font-size:14.5px;color:var(--suave);margin-top:12px}
-.card .ver{margin-top:14px;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--bosque);display:inline-flex;gap:8px;align-items:center;transition:gap .3s}
-.card .ver span{transition:transform .3s}
-.card:hover .ver{color:var(--laton)}
-.card:hover .ver span{transform:translateX(5px)}
-.menu-nota{text-align:center;margin-top:52px;font-size:13px;letter-spacing:.04em;color:var(--suave)}
-
-/* ===================== ESPECIALIDADES ===================== */
-.esp-item{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;gap:0}
-.esp-item+.esp-item{margin-top:14px}
-.esp-item .ph{aspect-ratio:auto;min-height:440px;border-radius:3px}
-.esp-item .txt{background:var(--bosque);color:var(--crema);padding:64px 64px;display:flex;flex-direction:column;justify-content:center;gap:16px;border-radius:3px}
-.esp-item:nth-child(even) .ph{order:2}
-.esp-num{font-family:var(--display);font-size:20px;color:var(--laton-claro)}
-.esp-item h3{font-size:clamp(34px,4.2vw,50px);color:var(--crema);font-weight:400}
-.esp-item p{color:rgba(247,243,234,.78);max-width:46ch;font-size:16px}
-.esp-item .precio{font-family:var(--display);font-size:26px;color:var(--laton-claro)}
-.esp-item .btn{align-self:flex-start;margin-top:8px;border-color:rgba(255,255,255,.5);color:#fff}
-.esp-item .btn:hover{background:var(--laton);border-color:var(--laton);color:#1b1407}
-
-/* ===================== GALERIA ===================== */
-.galeria{background:var(--bosque);color:var(--crema)}
-.galeria .h2,.contacto .h2{color:var(--crema)}
-.galeria .lead{color:rgba(247,243,234,.72)}
-.gal-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:150px;gap:14px;margin-top:52px}
-.gal{position:relative;overflow:hidden;border-radius:3px;cursor:pointer;background:linear-gradient(135deg,#20392b,#0f1f17)}
-.gal img{transition:transform 1.1s cubic-bezier(.2,.6,.2,1)}
-.gal:hover img{transform:scale(1.07)}
-.gal::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(8,14,10,.55));opacity:0;transition:opacity .4s}
-.gal:hover::after{opacity:1}
-.g1{grid-column:span 3;grid-row:span 2}
-.g2{grid-column:span 3;grid-row:span 2}
-.g3{grid-column:span 2;grid-row:span 2}
-.g4{grid-column:span 2;grid-row:span 2}
-.g5{grid-column:span 2;grid-row:span 2}
-
-/* ===================== EXPERIENCIA ===================== */
-.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;border:1px solid var(--linea);border-radius:3px;overflow:hidden}
-.exp{padding:46px 30px;text-align:center;border-right:1px solid var(--linea);transition:background .4s}
-.exp:last-child{border-right:0}
-.exp:hover{background:var(--crema-2)}
-.exp svg{width:40px;height:40px;margin:0 auto 20px;stroke:var(--laton);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
-.exp h3{font-size:23px;color:var(--bosque);margin-bottom:8px}
-.exp p{font-size:14px;color:var(--suave)}
-
-/* ===================== CONTACTO ===================== */
-.contacto{background:var(--bosque);color:var(--crema)}
-.cont-in{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:56px;align-items:stretch}
-.info-lista{display:grid;gap:30px;align-content:start}
-.fila h3{font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--laton-claro);margin-bottom:8px}
-.fila p,.fila a{color:rgba(247,243,234,.9);font-size:16px}
-.fila a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px}
-.horas{display:grid;grid-template-columns:auto 1fr;gap:6px 28px;font-size:15px;color:rgba(247,243,234,.9)}
-.horas dd{font-variant-numeric:tabular-nums;text-align:right}
-.nota-inline{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--laton-claro);border:1px solid rgba(201,168,106,.4);border-radius:2px;padding:3px 10px;margin-top:10px}
-.redes{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
-.redes a{border:1px solid rgba(247,243,234,.3);padding:9px 18px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;transition:background .3s}
-.redes a:hover{background:rgba(247,243,234,.1);text-decoration:none}
-.mapa{position:relative;border-radius:3px;overflow:hidden;min-height:440px;background:#cdd7c3}
-.mapa svg{position:absolute;inset:0;width:100%;height:100%}
-.mapa .pin-card{position:absolute;left:20px;right:20px;bottom:20px;background:var(--crema);color:var(--tinta);border-radius:3px;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-.mapa .pin-card b{font-family:var(--display);font-size:24px;color:var(--bosque);display:block}
-.mapa .pin-card small{font-size:13px;color:var(--suave)}
-
-/* ===================== FOOTER ===================== */
-footer{background:#0f1f17;color:rgba(247,243,234,.6);padding:72px 0 32px;font-size:14px}
-.foot{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px}
-footer .logo{color:var(--crema);margin-bottom:16px}
-footer h4{font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--laton-claro);margin-bottom:14px}
-footer ul{list-style:none;display:grid;gap:9px}
-footer a:hover{color:#fff}
-.copy{border-top:1px solid rgba(247,243,234,.12);margin-top:52px;padding-top:24px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12.5px;letter-spacing:.06em}
-
-/* ===================== MODAL ===================== */
-.modal{position:fixed;inset:0;z-index:100;background:rgba(10,18,13,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .35s}
-.modal.open{display:flex;opacity:1}
-.panel{background:var(--crema);border-radius:4px;max-width:900px;width:100%;max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;position:relative;transform:translateY(16px);transition:transform .4s cubic-bezier(.2,.6,.2,1)}
-.modal.open .panel{transform:none}
-.panel .m-ph{position:relative;min-height:360px;overflow:hidden}
-.panel.solo{grid-template-columns:1fr;max-width:760px}
-.panel.solo .m-ph{min-height:0;aspect-ratio:3/2}
-.m-info{padding:52px 46px;display:flex;flex-direction:column;gap:14px}
-.m-info .cat-lbl{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--laton)}
-.m-info h3{font-size:40px;color:var(--bosque);font-weight:400;line-height:1}
-.m-info .d-full{color:var(--suave);font-size:16px}
-.ing-ttl{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--bosque);margin-top:4px}
-.ing{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0}
-.ing li{border:1px solid var(--linea);border-radius:2px;padding:5px 13px;font-size:13px;color:var(--suave)}
-.m-precio{font-family:var(--display);font-size:32px;color:var(--laton);margin-top:2px}
-.cerrar{position:absolute;top:16px;right:16px;z-index:3;width:44px;height:44px;border-radius:50%;background:rgba(247,243,234,.92);font-size:20px;line-height:1;color:var(--bosque);box-shadow:0 6px 20px rgba(0,0,0,.2)}
-.cerrar:hover{background:#fff}
-
-/* ===================== REVEAL ===================== */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity 1s cubic-bezier(.2,.6,.2,1),transform 1s cubic-bezier(.2,.6,.2,1)}
-.reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){*{animation:none!important}html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.hero-bg img{animation:none}}
-
-/* ===================== RESPONSIVE ===================== */
-@media (max-width:980px){
-  section{padding:88px 0}
-  .burger{display:block}
-  .links{position:fixed;inset:0 0 0 auto;width:min(80vw,340px);background:var(--crema);flex-direction:column;align-items:stretch;justify-content:center;gap:0;padding:40px 36px;transform:translateX(100%);transition:transform .4s cubic-bezier(.2,.6,.2,1);box-shadow:-30px 0 60px -30px rgba(0,0,0,.4)}
-  .links.open{transform:none}
-  .links a{color:var(--tinta)!important;font-size:15px;padding:18px 0;border-bottom:1px solid var(--linea)}
-  .links a::after{display:none}
-  .links .navbtn{border:1px solid var(--bosque);color:var(--bosque)!important;text-align:center;margin-top:22px;justify-content:center}
-  .nosotros-in,.cont-in{grid-template-columns:1fr;gap:48px}
-  .nos-fig .ph{aspect-ratio:16/11}
-  .nos-fig .tag{right:16px}
-  .esp-item{grid-template-columns:1fr}
-  .esp-item:nth-child(even) .ph{order:0}
-  .esp-item .ph{min-height:300px}
-  .esp-item .txt{padding:44px 32px}
-  .grid{grid-template-columns:repeat(2,1fr);gap:26px 22px}
-  .exp-grid{grid-template-columns:1fr 1fr}
-  .exp:nth-child(2){border-right:0}
-  .exp:nth-child(1),.exp:nth-child(2){border-bottom:1px solid var(--linea)}
-  .panel{grid-template-columns:1fr;max-width:460px}
-  .panel .m-ph{aspect-ratio:3/2;min-height:0}
-  .m-info{padding:36px 30px}
-  .foot{grid-template-columns:1fr 1fr}
-  .foot>div:first-child{grid-column:1/-1}
-  .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:140px}
-  .g1,.g2,.g3,.g4,.g5{grid-column:span 1;grid-row:span 1}
-  .g1,.g4{grid-column:span 2}
-}
-@media (max-width:560px){
-  .wrap{padding:0 20px}
-  section{padding:72px 0}
-  .cats{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;margin-left:-20px;margin-right:-20px;padding:0 20px;scrollbar-width:none}
-  .cats::-webkit-scrollbar{display:none}
-  .cat{white-space:nowrap;flex:none}
-  .grid{grid-template-columns:1fr;gap:30px}
-  .pilares{grid-template-columns:1fr}
-  .exp-grid{grid-template-columns:1fr}
-  .exp{border-right:0;border-bottom:1px solid var(--linea)}
-  .exp:last-child{border-bottom:0}
-}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- ===================== NAV ===================== -->
 <header class="nav" id="nav">
   <div class="wrap nav-in">
     <a class="logo" href="#inicio" aria-label="Yerbabuena, inicio">
@@ -284,17 +21,16 @@ footer a:hover{color:#fff}
     <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="links"><span></span><span></span><span></span></button>
     <ul class="links" id="links">
       <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#menu">Menú</a></li>
+      <li><a href="menu.html">Menú</a></li>
       <li><a href="#especialidades">Especialidades</a></li>
       <li><a href="#nosotros">Nosotros</a></li>
       <li><a href="#contacto">Contacto</a></li>
-      <li><a class="navbtn" href="#menu">Explorar menú</a></li>
+      <li><a class="navbtn" href="menu.html">Ver la carta</a></li>
     </ul>
   </div>
 </header>
 
 <main>
-<!-- ===================== HERO ===================== -->
 <section class="hero" id="inicio">
   <div class="hero-bg" id="hero-bg"></div>
   <div class="hero-in">
@@ -303,14 +39,13 @@ footer a:hover{color:#fff}
     <p class="frase">Una experiencia inolvidable</p>
     <p class="txt">Cocina tradicional del Tolima con fusión, servida con detalle en un ambiente cuidado. Para el almuerzo de cada día y para las fechas que merecen celebrarse.</p>
     <div class="hero-btns">
-      <a class="btn btn-solid" href="#menu">Descubrir el menú</a>
+      <a class="btn btn-solid" href="menu.html">Ver la carta</a>
       <a class="btn btn-line" href="#nosotros">Conócenos</a>
     </div>
   </div>
   <div class="scroll-cue">Desliza<i></i></div>
 </section>
 
-<!-- ===================== NOSOTROS ===================== -->
 <section id="nosotros">
   <div class="wrap nosotros-in">
     <div class="nos-fig reveal">
@@ -331,21 +66,19 @@ footer a:hover{color:#fff}
   </div>
 </section>
 
-<!-- ===================== MENU ===================== -->
 <section class="menu" id="menu">
   <div class="wrap">
     <div class="center reveal" style="max-width:640px">
       <p class="label">La carta</p>
-      <h2 class="h2" style="margin-top:14px">Nuestro menú</h2>
-      <p class="lead">Elige una categoría y abre cada plato para ver sus ingredientes.</p>
+      <h2 class="h2" style="margin-top:14px">Un vistazo al menú</h2>
+      <p class="lead">Explora por categoría o abre la carta completa con todos los platos.</p>
     </div>
     <div class="cats reveal" id="cats" role="group" aria-label="Categorías del menú"></div>
     <div class="grid" id="grid" aria-live="polite"></div>
-    <p class="menu-nota">Platos y precios de ejemplo, por confirmar con el restaurante · Si tienes alguna alergia, avísanos al pedir.</p>
+    <div class="center" style="margin-top:48px"><a class="btn btn-dark" href="menu.html">Ver la carta completa</a></div>
   </div>
 </section>
 
-<!-- ===================== ESPECIALIDADES ===================== -->
 <section id="especialidades">
   <div class="wrap">
     <div class="center reveal" style="max-width:640px">
@@ -357,7 +90,6 @@ footer a:hover{color:#fff}
   </div>
 </section>
 
-<!-- ===================== GALERIA ===================== -->
 <section class="galeria" id="galeria">
   <div class="wrap">
     <div class="center reveal" style="max-width:640px">
@@ -369,7 +101,6 @@ footer a:hover{color:#fff}
   </div>
 </section>
 
-<!-- ===================== EXPERIENCIA ===================== -->
 <section id="experiencia">
   <div class="wrap">
     <div class="center reveal" style="max-width:640px">
@@ -385,7 +116,6 @@ footer a:hover{color:#fff}
   </div>
 </section>
 
-<!-- ===================== CONTACTO ===================== -->
 <section class="contacto" id="contacto">
   <div class="wrap">
     <div class="center reveal" style="max-width:640px">
@@ -418,7 +148,6 @@ footer a:hover{color:#fff}
 </section>
 </main>
 
-<!-- ===================== FOOTER ===================== -->
 <footer>
   <div class="wrap">
     <div class="foot">
@@ -426,74 +155,22 @@ footer a:hover{color:#fff}
         <a class="logo" href="#inicio"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 29C6 21 4 11 16 2c12 9 10 19 0 27z" fill="#b08d4c"/><path d="M16 29V9" stroke="#f7f3ea" stroke-width="1.4" fill="none"/></svg>Yerbabuena</a>
         <p>Cocina tradicional con fusión.<br>Una experiencia inolvidable en el corazón de Ibagué.</p>
       </div>
-      <div><h4>Navegación</h4><ul><li><a href="#menu">Menú</a></li><li><a href="#especialidades">Especialidades</a></li><li><a href="#galeria">Galería</a></li><li><a href="#nosotros">Nosotros</a></li><li><a href="#contacto">Contacto</a></li></ul></div>
+      <div><h4>Navegación</h4><ul><li><a href="menu.html">Menú</a></li><li><a href="#especialidades">Especialidades</a></li><li><a href="#galeria">Galería</a></li><li><a href="#nosotros">Nosotros</a></li><li><a href="#contacto">Contacto</a></li></ul></div>
       <div><h4>Visítanos</h4><ul><li>Cra. 6ª #9-81, Belén</li><li>Ibagué, Tolima</li><li>Mar–Jue 12–21h</li><li>Vie–Sáb 12–23h · Dom 12–17h</li><li><a href="https://www.instagram.com/yerbabuenarestaurante_/" target="_blank" rel="noopener">Instagram</a></li></ul></div>
     </div>
     <div class="copy"><span>© 2026 Restaurante Yerbabuena · Todos los derechos reservados</span><span>Ibagué, Colombia</span></div>
   </div>
 </footer>
 
-<!-- ===================== MODAL ===================== -->
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-titulo" aria-hidden="true">
   <div class="panel" id="panel"><button class="cerrar" id="cerrar" aria-label="Cerrar">✕</button><div id="m-contenido" style="display:contents"></div></div>
 </div>
 
+<script src="data.js"></script>
 <script>
-/* ---------- Ajustes del restaurante (reemplazar con datos reales) ---------- */
-var WHATSAPP = "57XXXXXXXXXX"; // indicativo + número, sin signos. Ej: 573001234567
-var MAPS = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Carrera 6 #9-81, Barrio Belén, Ibagué, Colombia");
-
-/* ---------- Fotos de stock (Unsplash). Reemplazar por fotos reales del restaurante. ---------- */
-function img(id,w){return "https://images.unsplash.com/photo-"+id+"?auto=format&fit=crop&w="+(w||900)+"&q=70"}
-var PIC={
-  plate:"1504674900247-0877df9cc836", fine:"1559339352-11d035aa65de", plating:"1559847844-5315695dadae",
-  pasta:"1473093295043-cdd812d0e601", penne:"1563379926898-05f4575a45d8", burger:"1568901346375-23c9450c58cd",
-  burger2:"1565299624946-b28f40a0ae38", bowl:"1546069901-ba9599a7e63c", salad:"1540189549336-e6e99c3679fe",
-  seafood:"1476224203421-9ac39bcb3327", salmon:"1467003909585-2f8a72700288", dessert:"1551024601-bec78aea704b",
-  cake:"1514362545857-3bc16c4c7d1b", flatlay:"1551218808-94e220e084d2", coffee:"1466978913421-dad2ebd01d17",
-  drink:"1544145945-f90425340c7e", interior:"1414235077428-338989a2e8c0", interior2:"1517248135467-4c7edcad34c4",
-  table:"1432139555190-58524dae6a55"
-};
-/* Imagen con respaldo: si la foto no carga, queda el degradado del contenedor */
-function phHTML(cls,id,w,alt){return '<div class="ph '+cls+'"><img src="'+img(id,w)+'" alt="'+(alt||"")+'" loading="lazy" onerror="this.classList.add(\'noimg\')"></div>'}
-
-/* ---------- Menú (ejemplo) ---------- */
-var CATS=["Entradas","Platos principales","Hamburguesas","Pastas","Postres","Bebidas"];
-var CLS=["e","p","h","pa","po","b"];
-var D=[
- {c:0,n:"Empanadas de pipián",p:18000,pic:"flatlay",d:"Masa crocante de maíz rellena de papa criolla y pipián.",l:"Tres empanadas doradas al momento, rellenas de papa criolla guisada con pipián, servidas con ají de maní y limón.",i:["Maíz","Papa criolla","Pipián","Ají de maní"]},
- {c:0,n:"Tostones con hogao",p:20000,pic:"plate",t:"Popular",d:"Plátano verde frito con hogao casero y queso costeño.",l:"Plátano verde frito dos veces, coronado con hogao de tomate y cebolla larga y queso costeño rallado.",i:["Plátano verde","Hogao","Queso costeño"]},
- {c:0,n:"Ceviche de mango biche",p:34000,pic:"seafood",t:"Nuevo",d:"Camarón, mango biche, cilantro y limón.",l:"Camarón cocido en limón con mango biche, cebolla morada, cilantro y un toque de ají dulce.",i:["Camarón","Mango biche","Cilantro","Limón"]},
- {c:0,n:"Crema de ahuyama",p:19000,pic:"salad",d:"Ahuyama asada, leche de coco y aceite de hierbabuena.",l:"Crema sedosa de ahuyama asada con leche de coco, terminada con aceite de hierbabuena y semillas tostadas.",i:["Ahuyama","Leche de coco","Hierbabuena"]},
- {c:1,n:"Lechona tolimense",p:42000,pic:"fine",t:"Especialidad",esp:1,d:"Cerdo y arroz arvejado horneados lentamente.",l:"Cerdo horneado por horas con arroz arvejado y especias, servido con arepa y encurtido de la casa.",i:["Cerdo","Arroz","Arveja","Arepa"]},
- {c:1,n:"Tamal tolimense",p:28000,pic:"plate",t:"Especialidad",esp:1,d:"Masa de maíz, cerdo, pollo y verduras en hoja de plátano.",l:"El clásico del Tolima: masa de maíz con cerdo, pollo, arroz y verduras, cocido lentamente en hoja de plátano.",i:["Maíz","Cerdo","Pollo","Hoja de plátano"]},
- {c:1,n:"Bandeja Yerbabuena",p:46000,pic:"plating",t:"Popular",d:"Lomo, chorizo, chicharrón, huevo, frijoles y arepa.",l:"Nuestra versión de la bandeja: lomo de res, chorizo, chicharrón, huevo, frijoles, arroz, plátano maduro y arepa.",i:["Lomo de res","Chorizo","Chicharrón","Frijoles"]},
- {c:1,n:"Trucha al ajillo",p:44000,pic:"salmon",t:"Especialidad",esp:1,d:"Trucha entera, mantequilla de ajo y arroz con coco.",l:"Trucha entera en mantequilla de ajo, con arroz con coco, patacón y ensalada fresca.",i:["Trucha","Ajo","Arroz con coco","Limón"]},
- {c:2,n:"Hamburguesa de lechona",p:36000,pic:"burger",t:"Nuevo",d:"Lechona desmechada, queso y salsa de ají dulce.",l:"Pan brioche con lechona desmechada, queso doble crema, cebolla encurtida y salsa de ají dulce. Con papas criollas.",i:["Pan brioche","Lechona","Queso","Ají dulce"]},
- {c:2,n:"Clásica de res",p:32000,pic:"burger2",d:"Carne de res 180 g, queso, lechuga y tomate.",l:"Carne de res de 180 g a la plancha, queso cheddar, lechuga, tomate y salsa de la casa.",i:["Res 180 g","Cheddar","Lechuga","Tomate"]},
- {c:2,n:"Hamburguesa de hongos",p:30000,pic:"burger",d:"Portobello asado, queso y pesto de hierbabuena.",l:"Portobello asado con queso fresco, rúgula y pesto de hierbabuena. Versión vegetariana.",i:["Portobello","Queso fresco","Rúgula","Pesto"]},
- {c:2,n:"Pollo crocante",p:31000,pic:"burger2",d:"Pechuga apanada, repollo y mayonesa de ají.",l:"Pechuga apanada con panko, repollo morado, pepinillos y mayonesa de ají.",i:["Pechuga","Panko","Repollo","Mayonesa de ají"]},
- {c:3,n:"Pasta al pesto de yerbabuena",p:34000,pic:"pasta",t:"Popular",d:"Fettuccine, pesto fresco, queso y nueces.",l:"Fettuccine con pesto de hierbabuena y albahaca, queso parmesano y nueces tostadas.",i:["Fettuccine","Hierbabuena","Albahaca","Nueces"]},
- {c:3,n:"Lasaña criolla",p:38000,pic:"pasta",d:"Carne desmechada, hogao y queso de la región.",l:"Capas de pasta, carne desmechada guisada con hogao, salsa blanca y queso gratinado.",i:["Pasta","Carne desmechada","Hogao","Queso"]},
- {c:3,n:"Penne al lomo",p:40000,pic:"penne",d:"Penne con tiras de lomo y salsa de champiñones.",l:"Penne con tiras de lomo fino salteadas, champiñones y crema ligera con pimienta verde.",i:["Penne","Lomo fino","Champiñones","Crema"]},
- {c:3,n:"Spaghetti de camarones",p:42000,pic:"seafood",d:"Camarones al ajillo, tomate cherry y albahaca.",l:"Spaghetti con camarones salteados al ajillo, tomate cherry, albahaca y un toque de ají.",i:["Spaghetti","Camarón","Tomate cherry","Albahaca"]},
- {c:4,n:"Tres leches de maracuyá",p:16000,pic:"cake",t:"Popular",d:"Bizcocho húmedo, crema ligera y maracuyá.",l:"Bizcocho bañado en tres leches con crema ligera y coulis de maracuyá fresco.",i:["Bizcocho","Tres leches","Maracuyá"]},
- {c:4,n:"Brevas con arequipe",p:15000,pic:"dessert",d:"Brevas en almíbar, arequipe artesanal y queso.",l:"Brevas en almíbar de panela acompañadas de arequipe artesanal y queso fresco.",i:["Brevas","Arequipe","Queso fresco"]},
- {c:4,n:"Volcán de cacao",p:19000,pic:"plating",t:"Nuevo",d:"Chocolate tibio con centro fluido y helado.",l:"Volcán de cacao colombiano con centro fluido, helado de vainilla y frutos rojos.",i:["Cacao","Vainilla","Frutos rojos"]},
- {c:4,n:"Helado de café del Tolima",p:14000,pic:"dessert",d:"Dos bolas de helado de café de origen.",l:"Helado artesanal hecho con café del Tolima y crocante de panela.",i:["Café","Leche","Panela"]},
- {c:5,n:"Limonada de hierbabuena",p:11000,pic:"drink",t:"Popular",d:"Limón, hierbabuena fresca y hielo.",l:"Limonada natural con hierbabuena recién macerada. Disponible con coco.",i:["Limón","Hierbabuena","Hielo"]},
- {c:5,n:"Jugos naturales",p:10000,pic:"drink",d:"Lulo, mora, maracuyá o mango.",l:"Jugos hechos al momento con fruta fresca, en agua o en leche.",i:["Lulo","Mora","Maracuyá","Mango"]},
- {c:5,n:"Café del Tolima",p:7000,pic:"coffee",d:"Café de origen en prensa francesa.",l:"Café de la región preparado en prensa francesa. Pregunta por el origen del día.",i:["Café de origen","Agua filtrada"]},
- {c:5,n:"Cerveza artesanal",p:14000,pic:"drink",d:"Referencias del día, bien frías.",l:"Selección de cervezas artesanales colombianas. Pregunta por las referencias del día.",i:["Cebada","Lúpulo"]}
-];
-function money(n){return "$"+n.toLocaleString("es-CO")}
-function wa(t){return "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(t)}
-
-/* ---------- Hero / Nosotros ---------- */
 document.getElementById("hero-bg").innerHTML='<img src="'+img(PIC.fine,1800)+'" alt="Plato de la casa" onerror="this.style.display=\'none\'">';
 document.getElementById("nos-ph").innerHTML='<img src="'+img(PIC.interior,1000)+'" alt="El salón de Yerbabuena" loading="lazy" onerror="this.classList.add(\'noimg\')">';
 
-/* ---------- Menú ---------- */
 var activeCat=0;
 function renderCats(){
   document.getElementById("cats").innerHTML=CATS.map(function(c,i){return '<button class="cat" type="button" data-cat="'+i+'" aria-pressed="'+(i===activeCat)+'">'+c+'</button>'}).join("");
@@ -513,7 +190,6 @@ function onCard(e){var b=e.target.closest("[data-dish]");if(b)openDish(+b.datase
 document.getElementById("grid").addEventListener("click",onCard);
 document.getElementById("grid").addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&e.target.closest("[data-dish]")){e.preventDefault();onCard(e)}});
 
-/* ---------- Especialidades ---------- */
 (function(){
   var html="",n=0;
   D.forEach(function(d,i){ if(!d.esp)return; n++;
@@ -526,7 +202,6 @@ document.getElementById("grid").addEventListener("keydown",function(e){if((e.key
   c.addEventListener("click",function(e){var b=e.target.closest("[data-dish]");if(b)openDish(+b.dataset.dish,b)});
 })();
 
-/* ---------- Galería ---------- */
 var GAL=[{p:"interior",t:"El salón",c:"g1"},{p:"plating",t:"En el plato",c:"g2"},{p:"table",t:"La mesa",c:"g3"},{p:"flatlay",t:"La cocina",c:"g4"},{p:"coffee",t:"Café del Tolima",c:"g5"}];
 (function(){
   var g=document.getElementById("gal");
@@ -534,7 +209,6 @@ var GAL=[{p:"interior",t:"El salón",c:"g1"},{p:"plating",t:"En el plato",c:"g2"
   g.addEventListener("click",function(e){var b=e.target.closest("[data-gal]");if(b)openGal(+b.dataset.gal,b)});
 })();
 
-/* ---------- Modal ---------- */
 var modal=document.getElementById("modal"),panel=document.getElementById("panel"),mc=document.getElementById("m-contenido"),last=null;
 function show(html,solo,trigger){last=trigger||document.activeElement;panel.classList.toggle("solo",!!solo);mc.innerHTML=html;modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";document.getElementById("cerrar").focus()}
 function close(){modal.classList.remove("open");modal.setAttribute("aria-hidden","true");document.body.style.overflow="";if(last&&last.focus)last.focus()}
@@ -549,7 +223,6 @@ document.getElementById("cerrar").addEventListener("click",close);
 modal.addEventListener("click",function(e){if(e.target===modal)close()});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&modal.classList.contains("open"))close()});
 
-/* ---------- Nav ---------- */
 var nav=document.getElementById("nav"),burger=document.getElementById("burger"),links=document.getElementById("links");
 function onScroll(){nav.classList.toggle("solid",window.scrollY>60)}
 window.addEventListener("scroll",onScroll,{passive:true});onScroll();
@@ -557,11 +230,9 @@ function setMenu(o){links.classList.toggle("open",o);burger.setAttribute("aria-e
 burger.addEventListener("click",function(){setMenu(!links.classList.contains("open"))});
 links.addEventListener("click",function(e){if(e.target.closest("a"))setMenu(false)});
 
-/* ---------- Enlaces de contacto ---------- */
 document.getElementById("wa-contacto").href=wa("Hola Yerbabuena, quiero reservar una mesa.");
 document.getElementById("mapa-link").href=MAPS;
 
-/* ---------- Reveal al hacer scroll ---------- */
 (function(){
   var els=[].slice.call(document.querySelectorAll(".reveal"));
   if(!("IntersectionObserver" in window)){els.forEach(function(el){el.classList.add("in")});return}

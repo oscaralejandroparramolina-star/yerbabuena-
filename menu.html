@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carta · Restaurante Yerbabuena</title>
+<meta name="description" content="La carta completa de Yerbabuena: entradas, platos principales, hamburguesas, pastas, postres y bebidas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>html{scroll-padding-top:128px}</style>
+</head>
+<body>
+
+<header class="nav subnav" id="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html" aria-label="Yerbabuena, inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 29C6 21 4 11 16 2c12 9 10 19 0 27z" fill="#b08d4c"/><path d="M16 29V9" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M16 17l-5-4M16 21l6-5" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+      Yerbabuena
+    </a>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="links"><span></span><span></span><span></span></button>
+    <ul class="links" id="links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#especialidades">Especialidades</a></li>
+      <li><a href="index.html#nosotros">Nosotros</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+      <li><a class="navbtn" id="wa-nav" href="#" target="_blank" rel="noopener">WhatsApp</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="menu-hero">
+  <div class="wrap">
+    <p class="label">Restaurante Yerbabuena</p>
+    <h1>La Carta</h1>
+    <p>Cocina tradicional del Tolima con fusión. Toca un plato para ver sus ingredientes. Precios en pesos colombianos.</p>
+  </div>
+</section>
+
+<nav class="jump" aria-label="Categorías de la carta">
+  <div class="wrap jump-in" id="jump"></div>
+</nav>
+
+<main class="wrap" id="carta"></main>
+
+<div class="menu-cta">
+  <a class="btn btn-dark" href="index.html">← Volver al inicio</a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 29C6 21 4 11 16 2c12 9 10 19 0 27z" fill="#b08d4c"/><path d="M16 29V9" stroke="#f7f3ea" stroke-width="1.4" fill="none"/></svg>Yerbabuena</a>
+        <p>Cocina tradicional con fusión.<br>Una experiencia inolvidable en el corazón de Ibagué.</p>
+      </div>
+      <div><h4>Navegación</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="index.html#especialidades">Especialidades</a></li><li><a href="index.html#galeria">Galería</a></li><li><a href="index.html#contacto">Contacto</a></li></ul></div>
+      <div><h4>Visítanos</h4><ul><li>Cra. 6ª #9-81, Belén</li><li>Ibagué, Tolima</li><li>Mar–Jue 12–21h</li><li>Vie–Sáb 12–23h · Dom 12–17h</li><li><a href="https://www.instagram.com/yerbabuenarestaurante_/" target="_blank" rel="noopener">Instagram</a></li></ul></div>
+    </div>
+    <div class="copy"><span>© 2026 Restaurante Yerbabuena · Todos los derechos reservados</span><span>Ibagué, Colombia</span></div>
+  </div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-titulo" aria-hidden="true">
+  <div class="panel" id="panel"><button class="cerrar" id="cerrar" aria-label="Cerrar">✕</button><div id="m-contenido" style="display:contents"></div></div>
+</div>
+
+<script src="data.js"></script>
+<script>
+/* Enlaces jump + secciones de cada categoría */
+(function(){
+  document.getElementById("jump").innerHTML=CATS.map(function(c,i){return '<a href="#cat'+i+'">'+c+'</a>'}).join("");
+  var out=[];
+  CATS.forEach(function(cat,ci){
+    var cards=[];
+    D.forEach(function(d,i){ if(d.c!==ci)return;
+      cards.push('<article class="card" data-dish="'+i+'" tabindex="0" role="button" aria-label="Ver '+d.n+'">'+
+        '<div class="ph '+CLS[d.c]+'">'+(d.t?'<span class="tag '+d.t+'">'+d.t+'</span>':'')+'<img src="'+img(d.pic,700)+'" alt="'+d.n+'" loading="lazy" onerror="this.classList.add(\'noimg\')"></div>'+
+        '<div class="card-head"><h3>'+d.n+'</h3><span class="precio">'+money(d.p)+'</span></div>'+
+        '<p>'+d.d+'</p><span class="ver">Ver detalles <span>→</span></span></article>');
+    });
+    out.push('<section class="mcat reveal" id="cat'+ci+'"><div class="mcat-head"><span class="n">0'+(ci+1)+'</span><h2>'+cat+'</h2></div>'+
+      (CAT_SUB[ci]?'<p class="lead" style="margin:-18px 0 30px">'+CAT_SUB[ci]+'</p>':'')+
+      '<div class="grid">'+cards.join("")+'</div></section>');
+  });
+  document.getElementById("carta").innerHTML=out.join("");
+})();
+
+/* Modal de detalle */
+var modal=document.getElementById("modal"),panel=document.getElementById("panel"),mc=document.getElementById("m-contenido"),last=null;
+function show(html,trigger){last=trigger||document.activeElement;mc.innerHTML=html;modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";document.getElementById("cerrar").focus()}
+function close(){modal.classList.remove("open");modal.setAttribute("aria-hidden","true");document.body.style.overflow="";if(last&&last.focus)last.focus()}
+function openDish(i,t){var d=D[i];
+  show('<div class="m-ph '+CLS[d.c]+'"><img src="'+img(d.pic,1000)+'" alt="'+d.n+'" onerror="this.classList.add(\'noimg\')"></div>'+
+    '<div class="m-info"><span class="cat-lbl">'+CATS[d.c]+(d.t?' · '+d.t:'')+'</span><h3 id="m-titulo">'+d.n+'</h3><p class="d-full">'+d.l+'</p>'+
+    '<div class="ing-ttl">Ingredientes principales</div><ul class="ing">'+d.i.map(function(x){return '<li>'+x+'</li>'}).join("")+'</ul>'+
+    '<div class="m-precio">'+money(d.p)+'</div>'+
+    '<a class="btn btn-dark" style="align-self:flex-start;margin-top:4px" target="_blank" rel="noopener" href="'+wa("Hola Yerbabuena, quiero pedir: "+d.n+" ("+money(d.p)+")")+'">Pedir por WhatsApp</a></div>',t)}
+document.getElementById("carta").addEventListener("click",function(e){var b=e.target.closest("[data-dish]");if(b)openDish(+b.dataset.dish,b)});
+document.getElementById("carta").addEventListener("keydown",function(e){var b=e.target.closest("[data-dish]");if(b&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openDish(+b.dataset.dish,b)}});
+document.getElementById("cerrar").addEventListener("click",close);
+modal.addEventListener("click",function(e){if(e.target===modal)close()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&modal.classList.contains("open"))close()});
+
+/* Nav móvil + WhatsApp */
+var burger=document.getElementById("burger"),links=document.getElementById("links");
+function setMenu(o){links.classList.toggle("open",o);burger.setAttribute("aria-expanded",o);burger.setAttribute("aria-label",o?"Cerrar menú":"Abrir menú")}
+burger.addEventListener("click",function(){setMenu(!links.classList.contains("open"))});
+links.addEventListener("click",function(e){if(e.target.closest("a"))setMenu(false)});
+document.getElementById("wa-nav").href=wa("Hola Yerbabuena, quiero hacer un pedido.");
+
+/* Resaltar la categoría activa al desplazar */
+(function(){
+  var chips=[].slice.call(document.querySelectorAll(".jump a"));
+  var secs=chips.map(function(a){return document.getElementById(a.getAttribute("href").slice(1))});
+  if(!("IntersectionObserver" in window))return;
+  var spy=new IntersectionObserver(function(es){es.forEach(function(en){
+    if(en.isIntersecting){var i=secs.indexOf(en.target);chips.forEach(function(c){c.classList.remove("active")});if(chips[i])chips[i].classList.add("active");
+      var a=chips[i];if(a)a.scrollIntoView({block:"nearest",inline:"nearest"});}
+  })},{rootMargin:"-30% 0px -65% 0px"});
+  secs.forEach(function(s){if(s)spy.observe(s)});
+})();
+
+/* Aparición suave */
+(function(){
+  var els=[].slice.call(document.querySelectorAll(".reveal"));
+  if(!("IntersectionObserver" in window)){els.forEach(function(el){el.classList.add("in")});return}
+  var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");obs.unobserve(en.target)}})},{threshold:.08,rootMargin:"0px 0px -5% 0px"});
+  els.forEach(function(el){obs.observe(el)});
+})();
+</script>
+</body>
+</html>
